@@ -144,6 +144,7 @@ input, select {
 .close:hover {
     color: #f44336;
     font-weight: bolder;
+    cursor: pointer;
 }
 
 table,
@@ -152,7 +153,6 @@ td {
     border: none;
     border-left: 1px solid #ccc;
     border-collapse: collapse;
-    cursor: pointer;
     position: relative;
     padding: 10px 20px;
     font-size: 18px;
@@ -166,22 +166,30 @@ table {
     border: 1px solid #ccc;
 }
 
-tr:nth-child(odd){
+tr:nth-child(odd) {
     background-color: #eee;
+}
+
+th {
+    background: rgb(200, 199, 199);
 }
 
 th:nth-child(1) {
     width: 10%;
 }
 
+table th {
+    border-bottom: 1px solid #ccc;
+}
 
 tr:hover {
     background: rgb(200, 199, 199);
 }
-tr:hover td {
-    border-left: 1px solid #666;
-}
 
+#nenhumPedido {
+    padding: 20px;
+    text-align: center;
+}
 
 #menu {
     display: none;

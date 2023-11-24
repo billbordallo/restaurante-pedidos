@@ -10,6 +10,9 @@ const getList = async () => {
     })
       .then((response) => response.json())
       .then((data) => {
+        if (data.pedidos.length != 0) {
+          document.getElementById("nenhumPedido").style.display = "none";
+        } 
         data.pedidos.forEach(item => insertList(item.id, item.mesa, item.responsavel, item.pedido, item.obs, item.status, item.valor, item.data_insercao))
       })
       .catch((error) => {
@@ -61,6 +64,7 @@ const postItem = async (inputMesa, inputResponsavel, inputPedido, inputObs, inpu
     let txt = document.createTextNode("\u00D7");
     span.className = "close";
     span.appendChild(txt);
+    span.setAttribute('title', 'Remover pedido');
     parent.appendChild(span);
   }
   
@@ -82,6 +86,7 @@ const postItem = async (inputMesa, inputResponsavel, inputPedido, inputObs, inpu
           div.remove()
           deleteItem(nomeItem)
           alert("Removido!")
+          location.reload();
         }
       }
     }
@@ -234,11 +239,6 @@ const getMenuList = async () => {
     Função carregar os itens do cardápio (menu) na seleção de pedidos
     --------------------------------------------------------------------------------------
  */
-    // const insertNewPedido = (nome_alimento) => {
-    //   var item = [nome_alimento];
-
-  
-    // }
 
     const listaPedidos = (nome_alimento, cat_alimento) => {
       var itemMenu = [nome_alimento, cat_alimento]
@@ -252,6 +252,7 @@ const getMenuList = async () => {
 
         return categorias;
     }, {});
+    // Em andamento
     console.log(itemMenu)
   }
 
@@ -301,7 +302,7 @@ const getMenuList = async () => {
         // Mapeamento de itens por categoria
         // Preciso encontrar uma maneira de carregar esse Array diretamente da API
         var pedidosPorCategoria = {
-          'Entrada': ['Iscas de frango', 'Tábua de frios', 'Gurjão de peixe'],
+          'Entrada': ['Pastel de queijo', 'Iscas de frango', 'Tábua de frios', 'Gurjão de peixe'],
           'Prato principal': ['Filé com fritas', 'Frango grelhado', 'Moqueca baiana'],
           'Acompanhamento': ['Salada verde', 'Batatas fritas', 'Arroz', 'Feijão', 'Farofa'],
           'Sobremesa': ['Sorvete de morango', 'Sorvete de creme', 'Petit gateau'],
@@ -362,6 +363,7 @@ const getMenuList = async () => {
 
       // Mapeamento de preços por item
       var precosPorItem = {
+        'Pastel de queijo': '25.00',
         'Iscas de frango': '35.00',
         'Tábua de frios': '45.00',
         'Gurjão de peixe': '50.00',
