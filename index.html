@@ -13,81 +13,90 @@
     <header>
         <h1>Pedidos Restaurante 1.0</h1>
     </header>
+
+    <section id="tabs">
+        <button class="tablinks" onclick="openTab(event, 'newItem')">Inserir Novo Pedido</button>
+        <button class="tablinks active" onclick="openTab(event, 'items')">Ver Pedidos</button>
+        <button class="tablinks" onclick="openTab(event, 'menu')">Ver Menu Completo</button>
+    </section>
     
     <!-- Opções para adicionar um novo item -->
-    <section class="newItem">
-        <div id="selectMesa" class="formField">
-            <label for="newMesa">Selecione a mesa:<br>
-                <select name="newMesa" id="newMesa">
-                    <option value="1">Mesa 1</option>
-                    <option value="2">Mesa 2</option>
-                    <option value="3">Mesa 3</option>
-                    <option value="4">Mesa 4</option>
-                    <option value="5">Mesa 5</option>
-                    <option value="6">Mesa 6</option>
-                    <option value="7">Mesa 7</option>
-                    <option value="8">Mesa 8</option>
-                    <option value="9">Mesa 9</option>
-                    <option value="10">Mesa 10</option>
-                </select>
-            </label>
-        </div>
-        <div id="selectResponsavel" class="formField">
-            <label for="newResponsavel">Responsável pelo pedido:<br>
-                <select name="newResponsavel" id="newResponsavel" disabled>
-                    <option value="João">João</option>
-                    <option value="Maria">Maria</option>
-                    <option value="Alberto">Alberto</option>
-                    <option value="Francisco">Francisco</option>
-                </select>
-            </label>
-        </div>
-        <div id="selectCategoria" class="formField">
-            <label for="newCatAlimento">Selecione a categoria:<br>
-                <select name="newCatAlimento" id="newCatAlimento" disabled>
-                    <option value=""></option>
-                </select>
-            </label>
-        </div>
-        <div id="selectPedido" class="formField">
-            <label for="newPedido">Item:<br>
-                <select name="newPedido" id="newPedido" disabled>
-                    <option value="">Selecione o item</option>
+    <section id="newItem" class="tabcontent">
+        <h2>Faça um novo pedido:</h2>
+        <div id="formPedido">
+            <div id="selectMesa" class="formField">
+                <label for="newMesa">Selecione a mesa:<br>
+                    <select name="newMesa" id="newMesa">
+                        <option value="1">Mesa 1</option>
+                        <option value="2">Mesa 2</option>
+                        <option value="3">Mesa 3</option>
+                        <option value="4">Mesa 4</option>
+                        <option value="5">Mesa 5</option>
+                        <option value="6">Mesa 6</option>
+                        <option value="7">Mesa 7</option>
+                        <option value="8">Mesa 8</option>
+                        <option value="9">Mesa 9</option>
+                        <option value="10">Mesa 10</option>
+                    </select>
+                </label>
+            </div>
+            <div id="selectResponsavel" class="formField">
+                <label for="newResponsavel">Responsável pelo pedido:<br>
+                    <select name="newResponsavel" id="newResponsavel" disabled>
+                        <option value="João">João</option>
+                        <option value="Maria">Maria</option>
+                        <option value="Alberto">Alberto</option>
+                        <option value="Francisco">Francisco</option>
+                    </select>
+                </label>
+            </div>
+            <div id="selectCategoria" class="formField">
+                <label for="newCatAlimento">Selecione a categoria:<br>
+                    <select name="newCatAlimento" id="newCatAlimento" disabled>
+                        <option value=""></option>
+                    </select>
+                </label>
+            </div>
+            <div id="selectPedido" class="formField">
+                <label for="newPedido">Item:<br>
+                    <select name="newPedido" id="newPedido" disabled>
+                        <option value="">Selecione o item</option>
             
-                </select>
-            </label>
-        </div>
-        <div id="selectObs" class="formField">
-            <label for="newObs">Observações:<br>
-                <input type="text" id="newObs" placeholder="Ex.: Sem cebola" disabled>
-            </label>
-        </div>
-        <div id="selectStatus">
-            <label for="newStatus">Status:<br>
-                <select name="newStatus" id="newStatus" disabled>
-                    <option value="Aguardando" selected>Aguardando</option>
-                    <option value="Em preparo">Em preparo</option>
-                    <option value="Concluído">Concluído</option>
-                </select>
-            </label>
-        </div>
-        <div id="selectPreco" class="formField">
-            <label for="newValor">Preço:<br>
-                <input type="text" id="newValor" placeholder="(não preencher)" disabled>
-            </label>
-        </div>
-        <input type="hidden" id="newData" value="">
-
-        <div class="formField">
-            <button onclick="newItem()" class="addBtn">Adicionar</button>
+                    </select>
+                </label>
+            </div>
+            <div id="selectObs" class="formField">
+                <label for="newObs">Observações:<br>
+                    <input type="text" id="newObs" placeholder="Ex.: Sem cebola" disabled>
+                </label>
+            </div>
+            <div id="selectStatus">
+                <label for="newStatus">Status:<br>
+                    <select name="newStatus" id="newStatus" disabled>
+                        <option value="Aguardando" selected>Aguardando</option>
+                        <option value="Em preparo">Em preparo</option>
+                        <option value="Concluído">Concluído</option>
+                    </select>
+                </label>
+            </div>
+            <div id="selectPreco" class="formField">
+                <label for="newValor">Preço:<br>
+                    <input type="text" id="newValor" placeholder="(não preencher)" disabled>
+                </label>
+            </div>
+            <input type="hidden" id="newData" value="">
+            <div class="formField">
+                <button onclick="newItem()" class="addBtn">Adicionar</button>
+            </div>
         </div>
     </section>
 
     <!-- Tabela com items existentes -->
-    <section class="items">
+    <section id="items" class="tabcontent">
+            <h2>Pedidos:</h2>
         <table id="myTable">
             <tr>
-                <th># Pedido</th>
+                <th>Pedido nº</th>
                 <th>Mesa</th>
                 <th>Responsável</th>
                 <th>Pedido</th>
@@ -100,8 +109,8 @@
         </table>
     </section>
 
-    <section id="menu">
-        <h2>Menu</h2>
+    <section id="menu" class="tabcontent">
+        <h2>Menu Completo:</h2>
 
         <table id="menuTable">
             <tr>

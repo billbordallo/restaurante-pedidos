@@ -6,51 +6,76 @@ li {
     margin: 0;
     padding: 0;
     background-color: rgb(225, 222, 199);
+    color: #333;
 }
 
 header {
-    background-color: rgb(225, 222, 199);
-    text-align: center;
-    position: relative;
+    background-color: #eee;
+    text-align: left;
     width: 100%;
+    border-bottom: 1px solid #ccc;
 }
 
-.title {
-    color: white;
-    width: 100%;
-    background-color: rgb(35, 32, 24);
+header h1 {
+    padding: 10px 0px 10px 20px;
+    font-size: 30px;
     display: inline-block;
-    padding: 2px 0px;
-    position: sticky;
-    top: 0px;
 }
 
-.banner {
-    height: 300px;
-    overflow: hidden;
+h2 {
+    display: block;
 }
 
-.banner img {
-    margin: 0px 0px 0px 0px;
-    width: 100%;
+#tabs {
+    margin: 20px auto;
+    padding: 0;
+    text-align: center;
 }
 
-.newItem {
+#tabs button {
+    background-color: #eee;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: 0.3s;
+    font-size: 18px;
+    text-align: center;
+    margin: 10px 20px;
+}
+
+#tabs button.active {
+    background-color: #ccc;
+}
+
+#tabs button:hover {
+    background-color: #ddd;
+}
+
+#newItem {
+    display: none;
+}
+
+#newItem h2 {
+    margin: 20px auto;
+    text-align: center;
+}
+
+#formPedido {
     background-color: #fff;
-    padding: 30px 40px;
+    padding: 20px 40px;
     color: #333;
-    /* display: flex; */
-    justify-content: center;
-    width: 30%;
-    margin: 2em auto;
+    width: 60%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
 }
 
-.newItem .formField {
+#formPedido .formField {
     display: block;
     /* float: left; */
 }
 
-.newItem .formField label {
+#formPedido .formField label {
     display: block;
     margin: 10px 0;
 }
@@ -58,13 +83,8 @@ header {
 input, select {
     padding: 10px;
     margin: 10px 0;
+    font-size: 18px;
 }
-
-/* .newItem:after {
-    content: "";
-    display: table;
-    clear: both;
-} */
 
 #newInput {
     margin: 0;
@@ -93,25 +113,32 @@ input, select {
 
 .addBtn {
     padding: 9px 10px;
-    background-color: rgb(35, 32, 24);
+    background-color: #2ab53a;
     color: white;
     text-align: center;
     font-size: 16px;
     cursor: pointer;
     transition: 0.3s;
-    border-radius: 2px;
+    border: none;
 }
 
 .addBtn:hover {
-    background-color: #2ab53a;
+    background-color: #136e1e;
     color: white;
 }
 
-.items {
+#items {
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
+}
+
+#items h2 {
+    margin: 20px auto;
+    text-align: center;
+}
+
+#myTable {
+    margin: 0 auto;
 }
 
 .close:hover {
@@ -122,38 +149,49 @@ input, select {
 table,
 th,
 td {
-    border: 1px solid black;
+    border: none;
+    border-left: 1px solid #ccc;
     border-collapse: collapse;
     cursor: pointer;
     position: relative;
-    padding: 12px 8px 12px 10px;
+    padding: 10px 20px;
     font-size: 18px;
     transition: 0.2s;
     text-align: start;
 }
 
-table{
+table {
     background-color: white;
-    width: 50%;
+    width: 60%;
+    border: 1px solid #ccc;
 }
 
 tr:nth-child(odd){
     background-color: #eee;
 }
 
-th:nth-child(1){
-    width: 80%;
+th:nth-child(1) {
+    width: 10%;
 }
+
 
 tr:hover {
     background: rgb(200, 199, 199);
 }
+tr:hover td {
+    border-left: 1px solid #666;
+}
 
-/* #selectResponsavel,
-#selectCategoria,
-#selectPedido,
-#selectObs,
-#selectStatus,
-#selectPreco {
+
+#menu {
     display: none;
-} */
+}
+
+#menu h2 {
+    margin: 20px auto;
+    text-align: center;
+}
+
+#menuTable {
+    margin: 0 auto;
+}

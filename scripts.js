@@ -127,6 +127,7 @@ const postItem = async (inputMesa, inputResponsavel, inputPedido, inputObs, inpu
       alert("Item adicionado!")
     }
   }
+
   
   /*
     --------------------------------------------------------------------------------------
@@ -383,3 +384,30 @@ const getMenuList = async () => {
         // Altere o valor do input text
         inputValor.value = precosPorItem[this.value];
       });
+
+
+  /*
+    --------------------------------------------------------------------------------------
+    Função para controlar a visibilidade dos componentes do sistema
+    --------------------------------------------------------------------------------------
+  */
+
+    function openTab(event, item) {
+      // Esconda todos os elementos com a classe "tabcontent"
+      var tabcontent = document.getElementsByClassName("tabcontent");
+      for (var i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+    
+      // Remova a classe "active" de todos os elementos com a classe "tablinks"
+      var tablinks = document.getElementsByClassName("tablinks");
+      for (var i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+    
+      // Mostre o elemento com o id igual ao item
+      document.getElementById(item).style.display = "block";
+    
+      // Adicione a classe "active" ao botão que foi clicado
+      event.currentTarget.className += " active";
+    }
