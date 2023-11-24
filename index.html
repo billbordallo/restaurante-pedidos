@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <title>Restaurante Pedidos</title>
+</head>
+<body>
+    <header>
+        <h1>Pedidos Restaurante 1.0</h1>
+    </header>
+    
+    <!-- Opções para adicionar um novo item -->
+    <section class="newItem">
+        <div id="selectMesa" class="formField">
+            <label for="newMesa">Selecione a mesa:<br>
+                <select name="newMesa" id="newMesa">
+                    <option value="1">Mesa 1</option>
+                    <option value="2">Mesa 2</option>
+                    <option value="3">Mesa 3</option>
+                    <option value="4">Mesa 4</option>
+                    <option value="5">Mesa 5</option>
+                    <option value="6">Mesa 6</option>
+                    <option value="7">Mesa 7</option>
+                    <option value="8">Mesa 8</option>
+                    <option value="9">Mesa 9</option>
+                    <option value="10">Mesa 10</option>
+                </select>
+            </label>
+        </div>
+        <div id="selectResponsavel" class="formField">
+            <label for="newResponsavel">Responsável pelo pedido:<br>
+                <select name="newResponsavel" id="newResponsavel" disabled>
+                    <option value="João">João</option>
+                    <option value="Maria">Maria</option>
+                    <option value="Alberto">Alberto</option>
+                    <option value="Francisco">Francisco</option>
+                </select>
+            </label>
+        </div>
+        <div id="selectCategoria" class="formField">
+            <label for="newCatAlimento">Selecione a categoria:<br>
+                <select name="newCatAlimento" id="newCatAlimento" disabled>
+                    <option value=""></option>
+                </select>
+            </label>
+        </div>
+        <div id="selectPedido" class="formField">
+            <label for="newPedido">Item:<br>
+                <select name="newPedido" id="newPedido" disabled>
+                    <option value="">Selecione o item</option>
+            
+                </select>
+            </label>
+        </div>
+        <div id="selectObs" class="formField">
+            <label for="newObs">Observações:<br>
+                <input type="text" id="newObs" placeholder="Ex.: Sem cebola" disabled>
+            </label>
+        </div>
+        <div id="selectStatus">
+            <label for="newStatus">Status:<br>
+                <select name="newStatus" id="newStatus" disabled>
+                    <option value="Aguardando" selected>Aguardando</option>
+                    <option value="Em preparo">Em preparo</option>
+                    <option value="Concluído">Concluído</option>
+                </select>
+            </label>
+        </div>
+        <div id="selectPreco" class="formField">
+            <label for="newValor">Preço:<br>
+                <input type="text" id="newValor" placeholder="(não preencher)" disabled>
+            </label>
+        </div>
+        <input type="hidden" id="newData" value="">
+
+        <div class="formField">
+            <button onclick="newItem()" class="addBtn">Adicionar</button>
+        </div>
+    </section>
+
+    <!-- Tabela com items existentes -->
+    <section class="items">
+        <table id="myTable">
+            <tr>
+                <th># Pedido</th>
+                <th>Mesa</th>
+                <th>Responsável</th>
+                <th>Pedido</th>
+                <th>Observação</th>
+                <th>Status</th>
+                <th>Valor</th>
+                <th>Pedido feito em</th>
+                <th><img src="https://cdn-icons-png.flaticon.com/512/126/126468.png" width="15px" height="15px"></th>
+            </tr>
+        </table>
+    </section>
+
+    <section id="menu">
+        <h2>Menu</h2>
+
+        <table id="menuTable">
+            <tr>
+                <th>#</th>
+                <th>Item</th>
+                <th>Categoria</th>
+                <th>Descrição</th>
+                <th>Preço</th>
+            </tr>
+        </table>
+
+    </section>
+
+    <script src="scripts.js"></script>
+    
+</body>
+</html>
