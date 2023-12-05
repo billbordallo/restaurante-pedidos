@@ -29,7 +29,7 @@ const getList = async () => {
 
   /*
   --------------------------------------------------------------------------------------
-  Função para colocar um item na lista do servidor via requisição POST (Não está sendo usada)
+  Função para colocar um item na lista do servidor via requisição POST
   --------------------------------------------------------------------------------------
 */
 const postItem = async (inputMesa, inputResponsavel, inputPedido, inputObs, inputStatus, inputValor, inputData) => {
@@ -76,7 +76,6 @@ const postItem = async (inputMesa, inputResponsavel, inputPedido, inputObs, inpu
   */
   const removeElement = () => {
     let close = document.getElementsByClassName("close");
-    // var table = document.getElementById('myTable');
     let i;
     for (i = 0; i < close.length; i++) {
       close[i].onclick = function () {
@@ -147,6 +146,11 @@ const postItem = async (inputMesa, inputResponsavel, inputPedido, inputObs, inpu
     for (var i = 0; i < item.length; i++) {
       var cel = row.insertCell(i);
       cel.textContent = item[i];
+      // Na sexta coluna de cada linha, adiciono a indicação para editar o status do pedido
+      if (i === 5) {
+        cel.setAttribute('title', 'Editar Status');
+        cel.setAttribute('class', 'editar-status');
+      }
     }
     insertButton(row.insertCell(-1))
     document.getElementById("newMesa").value = "";
@@ -236,7 +240,7 @@ const getMenuList = async () => {
 
   /*
     --------------------------------------------------------------------------------------
-    Função carregar os itens do cardápio (menu) na seleção de pedidos
+    Função carregar dinamicamente os itens do cardápio (menu) e preços na seleção de pedidos
     --------------------------------------------------------------------------------------
  */
 
@@ -374,6 +378,88 @@ const getMenuList = async () => {
         inputValor.value = precosPorItem[this.value];
       });
 
+  /*
+    --------------------------------------------------------------------------------------
+    Função para criar um select ao clicar sobre a coluna status
+    --------------------------------------------------------------------------------------
+  */
+
+    // Obtenha uma referência à tabela
+    var table2 = document.getElementById('myTable');
+
+    // Adicione um ouvinte de evento click à tabela
+    table2.addEventListener('click', function(event) {
+      // Adiciono à célula a classe "em-edicao"
+      event.target.classList.add('em-edicao');
+      
+      // Se o elemento clicado tem a classe 'editar-status', crie o select
+      if (event.target.classList.contains('editar-status')) {
+        // Crie um novo elemento select
+        var select = document.createElement('select');
+        // Defina as strings para as options
+        var optionsText = ['', 'Aguardando', 'Em preparação', 'Concluído'];
+
+        // Crie 3 options e adicione-os ao select
+        for (var j = 0; j < optionsText.length; j++) {
+          var option = document.createElement('option');
+          option.value = optionsText[j];
+          option.text = optionsText[j];
+          select.appendChild(option);
+        }
+
+        // Adicione o select à célula td
+        event.target.appendChild(select);
+        
+        // Crie um novo elemento button
+        var button = document.createElement('button');
+        // Defina o texto do botão
+        button.textContent = 'Enviar';
+        // Adicione a classe ao botão
+        button.classList.add('btn-atualiza-status');
+        // Obtenha o id do pedido
+        var inputId = event.target.parentNode.cells[0].innerHTML;
+        console.log(inputId)
+
+        // Adicione um ouvinte de evento change ao select
+        select.addEventListener('change', function() {
+          // Obtenha o valor selecionado
+          var novoStatus = this.value;
+          console.log(novoStatus)
+          // Chame a função para atualizar o status do pedido
+          button.setAttribute('onclick', 'updateItemStatus(' + inputId + ', "' + novoStatus + '")');
+        });
+
+        event.target.appendChild(button);
+      }
+
+    });
+
+  /*
+  --------------------------------------------------------------------------------------
+  Função para alterar o status de um item na lista do servidor via requisição POST
+  --------------------------------------------------------------------------------------
+*/
+
+    const updateItemStatus = (inputId, novoStatus) => {
+      // Defina a URL e o corpo da requisição
+      var url = 'http://127.0.0.1:5000/pedido?id=' + inputId;
+
+      const formData = new FormData();
+      formData.append('id', inputId);
+      formData.append('status', novoStatus);
+
+      // Envie a requisição PUT
+      fetch(url, {
+        method: 'put', 
+        body: formData
+      }).then(response => response.json())
+        .then(data => console.log(data))
+        .then(alert("Status atualizado!"))
+        .then(location.reload())
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    }
 
   /*
     --------------------------------------------------------------------------------------

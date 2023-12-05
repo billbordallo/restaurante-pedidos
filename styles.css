@@ -114,7 +114,8 @@ input, select {
 }
 
 
-.addBtn {
+.addBtn,
+.btn-atualiza-status {
     padding: 9px 10px;
     background-color: #2ab53a;
     color: white;
@@ -172,6 +173,18 @@ table {
 tr:nth-child(odd) {
     background-color: #eee;
 }
+
+tr td:nth-child(6) {
+    background-image: url(img/edit.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+    padding-right: 50px;
+    cursor: pointer;
+}
+tr td:nth-child(6).em-edicao {
+    background-image: none;
+}
+
 
 th {
     background: rgb(200, 199, 199);
