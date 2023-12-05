@@ -29,7 +29,7 @@ const getList = async () => {
 
   /*
   --------------------------------------------------------------------------------------
-  Função para colocar um item na lista do servidor via requisição POST
+  Função para colocar um item na lista do servidor via requisição POST (Não está sendo usada)
   --------------------------------------------------------------------------------------
 */
 const postItem = async (inputMesa, inputResponsavel, inputPedido, inputObs, inputStatus, inputValor, inputData) => {
@@ -177,7 +177,7 @@ const getMenuList = async () => {
       .then((data) => {
             data.menus.forEach(item => insertMenu(item.id, item.nome_alimento, item.cat_alimento, item.desc_alimento, item.preco))
             data.menus.forEach(item => insertNewCatAlimento(item.cat_alimento))
-            data.menus.forEach(item => listaPedidos(item.cat_alimento, item.nome_alimento))
+            //data.menus.forEach(item => listaPedidos(item.cat_alimento, item.nome_alimento))
             
       })
       .catch((error) => {
@@ -240,36 +240,53 @@ const getMenuList = async () => {
     --------------------------------------------------------------------------------------
  */
 
+    const getListPedidos = async () => {
+      let url = 'http://127.0.0.1:5000/cardapio';
+      fetch(url, {
+        method: 'get',
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          data.menus.forEach(item => listaPedidos(item.nome_alimento, item.cat_alimento))
+          data.menus.forEach(item => listaPrecos(item.nome_alimento, item.preco))
+
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    }
+    getListPedidos();
+
+    // Crie um objeto para armazenar as categorias e os nomes dos alimentos
+    var pedidosPorCategoria = {};
+    
     const listaPedidos = (nome_alimento, cat_alimento) => {
-      var itemMenu = [nome_alimento, cat_alimento]
 
-      itemMenu.reduce((categorias, item) => {
-        if (!categorias[item.cat_alimento]) {
-          categorias[item.cat_alimento] = [];
-        }
+      // Se a categoria ainda não existe no objeto, crie-a
+      if (!pedidosPorCategoria[cat_alimento]) {
+        pedidosPorCategoria[cat_alimento] = [];
+      }
 
-        categorias[item.cat_alimento].push(item.nome_alimento);
+      // Adicione o nome do alimento à categoria correspondente
+      pedidosPorCategoria[cat_alimento].push(nome_alimento);
 
-        return categorias;
-    }, {});
-    // Em andamento
-    console.log(itemMenu)
   }
 
-  
-  /*
-    --------------------------------------------------------------------------------------
-    Função carregar os preços dos itens do cardápio (menu) na lista de pedidos
-    --------------------------------------------------------------------------------------
- */
-    // const insertNewPreco = (nome_alimento, preco) => {
-    //   var itemNome = [nome_alimento];
-    //   var itemPreco = [preco];
-      
-      // Verifico o nome do item selecionado e carrego o preço correspondente baseado em id="menuTable"
-      
-    //}
+    // Crio um objeto para armazenar os preços dos alimentos
+    var precosPorItem = {};
 
+    const listaPrecos = (nome_alimento, preco_alimento) => {
+
+      // Se a categoria ainda não existe no objeto, crie-a
+      if (!precosPorItem[nome_alimento]) {
+        precosPorItem[nome_alimento] = [];
+      }
+
+      // Adicione o nome do alimento à categoria correspondente
+      precosPorItem[nome_alimento].push(preco_alimento);
+
+  }
+  
   /*
     --------------------------------------------------------------------------------------
     Funções para carregar os itens no formulário de pedido à medida que vão sendo preenchidos
@@ -300,15 +317,7 @@ const getMenuList = async () => {
     selectCategoria.addEventListener('change', function() {
       
         // Mapeamento de itens por categoria
-        // Preciso encontrar uma maneira de carregar esse Array diretamente da API
-        var pedidosPorCategoria = {
-          'Entrada': ['Pastel de queijo', 'Iscas de frango', 'Tábua de frios', 'Gurjão de peixe'],
-          'Prato principal': ['Filé com fritas', 'Frango grelhado', 'Moqueca baiana'],
-          'Acompanhamento': ['Salada verde', 'Batatas fritas', 'Arroz', 'Feijão', 'Farofa'],
-          'Sobremesa': ['Sorvete de morango', 'Sorvete de creme', 'Petit gateau'],
-          'Bebida': ['Coca-cola', 'Guaraná', 'Chopp'],
-        };
-        // Quando uma opção é selecionada, obtenha a lista correspondente de pedidos
+        // Quando uma opção é selecionada, obtenho a lista correspondente de pedidos
         var pedidos = pedidosPorCategoria[this.value];
 
         // Obtenha uma referência ao elemento select do pedido
@@ -358,30 +367,8 @@ const getMenuList = async () => {
     var selectPedido = document.getElementById('newPedido');
     // Adicione um ouvinte de evento ao select
     selectPedido.addEventListener('change', function() {
-      // Quando uma opção é selecionada, obtenha uma referência ao input text
+      // Quando uma opção é selecionada, preencho dinamicamente o campo de preço
       var inputValor = document.getElementById('newValor');
-
-      // Mapeamento de preços por item
-      var precosPorItem = {
-        'Pastel de queijo': '25.00',
-        'Iscas de frango': '35.00',
-        'Tábua de frios': '45.00',
-        'Gurjão de peixe': '50.00',
-        'Filé com fritas': '45.90',
-        'Frango grelhado': '39.90',
-        'Moqueca baiana': '54.90',
-        'Salada verde': '19.90',
-        'Batatas fritas': '19.90',
-        'Arroz': '15.00',
-        'Feijão': '15.00',
-        'Farofa': '15.00',
-        'Sorvete de morango': '12.90',
-        'Sorvete de creme': '12.90',
-        'Petit gateau': '22.50',
-        'Coca-cola': '7.50',
-        'Guaraná': '7.50',
-        'Chopp': '9.90',
-      };
 
         // Altere o valor do input text
         inputValor.value = precosPorItem[this.value];
@@ -390,7 +377,7 @@ const getMenuList = async () => {
 
   /*
     --------------------------------------------------------------------------------------
-    Função para controlar a visibilidade dos componentes do sistema
+    Função para controlar a visibilidade das abas no front end
     --------------------------------------------------------------------------------------
   */
 

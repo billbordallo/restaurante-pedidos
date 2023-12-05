@@ -5,12 +5,12 @@ li {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: rgb(225, 222, 199);
+    background-color: #eee;
     color: #333;
 }
 
 header {
-    background-color: #eee;
+    background-color: #e83031;
     text-align: left;
     width: 100%;
     border-bottom: 1px solid #ccc;
@@ -20,6 +20,7 @@ header h1 {
     padding: 10px 0px 10px 20px;
     font-size: 30px;
     display: inline-block;
+    color: #fff;
 }
 
 h2 {
@@ -34,7 +35,7 @@ h2 {
 
 #tabs button {
     background-color: #eee;
-    border: none;
+    border: 1px solid #e83031;
     outline: none;
     cursor: pointer;
     padding: 10px 20px;
@@ -44,8 +45,10 @@ h2 {
     margin: 10px 20px;
 }
 
-#tabs button.active {
-    background-color: #ccc;
+#tabs button.active,
+#tabs button.active:hover {
+    background-color: #e83031;
+    color: #fff;
 }
 
 #tabs button:hover {
