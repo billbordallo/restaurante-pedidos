@@ -365,12 +365,17 @@ selectCategoria.addEventListener('change', function () {
   selectPedido.appendChild(optionPadrao);
   optionPadrao.value = '';
   optionPadrao.textContent = 'Selecione o item';
-  // Adiciono uma opção para cada pedido
-  for (var i = 0; i < pedidos.length; i++) {
-    var option = document.createElement('option');
-    option.value = pedidos[i];
-    option.textContent = pedidos[i];
-    selectPedido.appendChild(option);
+  // Se o item pedidos está vazio, alerto o usuário
+  if (!pedidos) {
+    alert("É necessário selecionar uma categoria");
+  } else {
+    // Adiciono uma opção para cada pedido
+    for (var i = 0; i < pedidos.length; i++) {
+      var option = document.createElement('option');
+      option.value = pedidos[i];
+      option.textContent = pedidos[i];
+      selectPedido.appendChild(option);
+    }
   }
 
   // Quando uma categoria é selecionada, removo o atributo disabled do select de pedido
