@@ -96,6 +96,11 @@ h2 {
     margin: 10px 0;
 }
 
+.formField span {
+    display: block;
+    margin-bottom: 10px;
+}
+
 input,
 select {
     padding: 10px;

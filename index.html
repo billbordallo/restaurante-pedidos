@@ -25,7 +25,7 @@
         <h2>Faça um novo pedido:</h2>
         <div id="formPedido">
             <div id="selectMesa" class="formField">
-                <label for="newMesa">Selecione a mesa:<br>
+                <label for="newMesa">Selecione a mesa:*<br>
                     <select name="newMesa" id="newMesa">
                         <option value=""></option>
                         <option value="1">Mesa 1</option>
@@ -42,7 +42,7 @@
                 </label>
             </div>
             <div id="selectResponsavel" class="formField">
-                <label for="newResponsavel">Responsável pelo pedido:<br>
+                <label for="newResponsavel">Responsável pelo pedido:*<br>
                     <select name="newResponsavel" id="newResponsavel" disabled>
                         <option value="João">João</option>
                         <option value="Maria">Maria</option>
@@ -52,14 +52,14 @@
                 </label>
             </div>
             <div id="selectCategoria" class="formField">
-                <label for="newCatAlimento">Selecione a categoria:<br>
+                <label for="newCatAlimento">Selecione a categoria:*<br>
                     <select name="newCatAlimento" id="newCatAlimento" disabled>
                         <option value=""></option>
                     </select>
                 </label>
             </div>
             <div id="selectPedido" class="formField">
-                <label for="newPedido">Item:<br>
+                <label for="newPedido">Item:*<br>
                     <select name="newPedido" id="newPedido" disabled>
                         <option value="">Selecione o item</option>
             
@@ -81,12 +81,13 @@
                 </label>
             </div>
             <div id="selectPreco" class="formField">
-                <label for="newValor">Preço:<br>
+                <label for="newValor">Preço (apenas para consulta - não preencher):<br>
                     <input type="text" id="newValor" placeholder="(não preencher)" disabled>
                 </label>
             </div>
             <input type="hidden" id="newData" value="">
             <div class="formField">
+                <span>* Campos obrigatórios</span>
                 <button onclick="newItem()" class="addBtn">Adicionar</button>
             </div>
         </div>

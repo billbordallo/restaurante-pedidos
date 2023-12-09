@@ -125,6 +125,10 @@ const newItem = () => {
 
   if (inputMesa === '') {
     alert("Selecione a mesa");
+  } else if (inputResponsavel === '') {
+    alert("Selecione o responsável");
+  } else if (inputPedido === '') {
+    alert("Selecione o item");
   } else {
     postItem(inputMesa, inputResponsavel, inputPedido, inputObs, inputStatus, inputValor, inputData)
     // Atualizo a página para carregar os dados atualizados no banco de dados
