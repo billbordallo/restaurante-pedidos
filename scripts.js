@@ -465,6 +465,9 @@ table2.addEventListener('click', function (event) {
         // Adiciono uma classe ao botão Enviar
         button.classList.add('btn-atualiza-status');
 
+        // adiciono a função para envio do novo status, mas ainda com os parâmetros vazios
+        button.setAttribute('onclick', 'updateItemStatus("", "")');
+
         // Obtenho o id do pedido (primeira célula da linha)
         var inputId = event.target.parentNode.cells[0].innerHTML;
 
