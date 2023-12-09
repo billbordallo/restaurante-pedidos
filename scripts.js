@@ -47,7 +47,32 @@ const postItem = async (inputMesa, inputResponsavel, inputPedido, inputObs, inpu
     method: 'post',
     body: formData
   })
-    .then((response) => response.json())
+    //.then((response) => response.json()
+    .then((response) => {
+      console.log(response)
+        if (response.status === 200) {
+          response.json()
+        }
+        if (!response.ok) {
+            return response.json().then(errorData => {
+                console.log(errorData)
+                alert(errorData.mesage);
+            });
+        }
+        if (response.status === 409) {
+            return response.json().then(errorData => {
+                console.log(errorData)
+                alert('Error 409: ' + errorData.mesage);
+            });
+        }
+        if (response.status === 422) {
+          return response.json().then(errorData => {
+              console.log(errorData)
+              alert('Error 422: ' + errorData.mesage);
+          });
+      }
+    }
+    )
     .catch((error) => {
       console.error('Error:', error);
     });
@@ -464,25 +489,31 @@ Função para alterar o status de um item na lista do servidor via requisição 
 
 const updateItemStatus = (inputId, novoStatus) => {
 
-  // Defino a URL e o corpo da requisição
-  var url = 'http://127.0.0.1:5000/pedido?id=' + inputId;
+  if (novoStatus === '') {
+    alert("Selecione o status");
+  } else {
 
-  const formData = new FormData();
-  formData.append('id', inputId);
-  formData.append('status', novoStatus);
+    // Defino a URL e o corpo da requisição
+    var url = 'http://127.0.0.1:5000/pedido?id=' + inputId;
 
-  // Envio a requisição PUT
-  fetch(url, {
-    method: 'put',
-    body: formData
-  }).then(response => response.json())
-    .then(data => console.log(data))
-    .then(alert("Status atualizado!"))
-    // Atualizo a página para carregar os dados atualizados no banco de dados
-    .then(location.reload())
-    .catch((error) => {
-      console.error('Error:', error);
-    });
+    const formData = new FormData();
+    formData.append('id', inputId);
+    formData.append('status', novoStatus);
+
+    // Envio a requisição PUT
+    fetch(url, {
+      method: 'put',
+      body: formData
+    })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .then(alert("Status atualizado!"))
+      // Atualizo a página para carregar os dados atualizados no banco de dados
+      .then(location.reload())
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
 }
 
 /*
